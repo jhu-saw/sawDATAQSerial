@@ -8,6 +8,7 @@ set (REQUIRED_CISST_LIBRARIES
      cisstMultiTask
      cisstMultiTaskQt
      cisstParameterTypes
+     cisstParameterTypesQt
      cisstQt)
 
 # cisst

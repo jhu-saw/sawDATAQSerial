@@ -2,7 +2,7 @@
 /* ex: set filetype=cpp softtabstop=4 shiftwidth=4 tabstop=4 cindent expandtab: */
 
 /*
-  (C) Copyright 2016 Johns Hopkins University (JHU), All Rights Reserved.
+  (C) Copyright 2016-2019 Johns Hopkins University (JHU), All Rights Reserved.
 
 --- begin cisst license - do not edit ---
 
@@ -16,17 +16,17 @@ http://www.cisst.org/cisst/license.txt.
 #ifndef _mtsDATAQSerialQtWidget_h
 #define _mtsDATAQSerialQtWidget_h
 
-#include <cisstVector/vctQtWidgetDynamicVector.h>
-#include <cisstVector/vctPlot2DOpenGLQtWidget.h>
 #include <cisstMultiTask/mtsComponent.h>
-#include <cisstMultiTask/mtsQtWidgetIntervalStatistics.h>
+#include <cisstMultiTask/mtsIntervalStatistics.h>
 #include <cisstParameterTypes/prmInputData.h>
 
 #include <QTabWidget>
-#include <QSpinBox>
 
 // Always include last
 #include <sawDATAQSerial/sawDATAQSerialQtExport.h>
+
+class mtsIntervalStatisticsQtWidget;
+class prmInputDataQtWidget;
 
 class CISST_EXPORT mtsDATAQSerialQtWidget: public QTabWidget, public mtsComponent
 {
@@ -42,17 +42,12 @@ public:
     void Configure(const std::string & filename = "");
     void Startup(void);
     void Cleanup(void);
-    
-private slots:
-     void SlotPlotIndex(int newAxis);
 
-     
 
 protected:
     virtual void timerEvent(QTimerEvent * event);
     virtual void closeEvent(QCloseEvent * event);
 
-    //! setup TeleOperationPSM controller GUI
     void setupUi(void);
     int TimerPeriodInMilliseconds;
 
@@ -60,19 +55,12 @@ protected:
       mtsFunctionRead GetInputs;
       prmInputData Inputs;
     } DAQ;
-
-    vctQtWidgetDynamicVectorDoubleRead * QVRAnalogInputsWidget;
-    vctQtWidgetDynamicVectorBoolRead * QVRDigitalInputsWidget;
+    prmInputDataQtWidget * QPInputData;
 
     // timing
     mtsIntervalStatistics IntervalStatistics;
-    mtsQtWidgetIntervalStatistics * QMIntervalStatistics;
+    mtsIntervalStatisticsQtWidget * QMIntervalStatistics;
     mtsFunctionRead GetPeriodStatistics;
-
-    vctPlot2DOpenGLQtWidget * QVPlot;
-    vctPlot2DBase::Signal * AnalogSignal;
-    QSpinBox * QSBPlotIndex;
-    int PlotIndex;
 };
 
 CMN_DECLARE_SERVICES_INSTANTIATION(mtsDATAQSerialQtWidget);

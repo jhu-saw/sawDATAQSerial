@@ -2,7 +2,10 @@
 /* ex: set filetype=cpp softtabstop=4 shiftwidth=4 tabstop=4 cindent expandtab: */
 
 /*
-  (C) Copyright 2016 Johns Hopkins University (JHU), All Rights Reserved.
+  Author(s): Jennifer Wu, Anton Deguet
+  Created on: 2016
+
+  (C) Copyright 2016-2019 Johns Hopkins University (JHU), All Rights Reserved.
 
   --- begin cisst license - do not edit ---
 
@@ -296,8 +299,7 @@ void mtsDATAQSerial::ReadBinary(void)
             int negateHighBit = !highBit;
             int shiftHighBit = negateHighBit << 6;
             int currentValue = value + shiftHighBit;
-                
-           
+
             //handle 2's complement conversion from binary to integer
             if (highBit + 1 == 0) { // positive
                 currentValue++;
@@ -364,7 +366,7 @@ void mtsDATAQSerial::ReadAscii(void)
                         // parse in the digital values
                         mInputs.DigitalInputs()[0] = digitalValue / 2;
                         mInputs.DigitalInputs()[1] = digitalValue % 2;
-                        
+
                         mDataStateTable.Advance();
                     }
                 }
